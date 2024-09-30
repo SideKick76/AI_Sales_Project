@@ -1,5 +1,6 @@
 
 import shutil
+import os
 
 def erase_folder(folder_path):
     """
@@ -17,3 +18,6 @@ def erase_folder(folder_path):
         # main_placeholder.text(f"Error erasing folder")
     # time.sleep(3) # Time for showing the erase status
 
+
+def check_folder_exists(folder_path):
+    return os.path.exists(folder_path)
