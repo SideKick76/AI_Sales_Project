@@ -34,8 +34,7 @@ st.set_page_config(
 
 def main() -> None:
 
-    st.subheader("🧠 AI-Sales Tool, powered by {llm}", divider="gray", anchor=False)
-
+    st.subheader("🧠 AI-Sales Tool", divider="gray", anchor=False)
     col1, col2 = st.columns([1.5, 2])
 
     with col1:
