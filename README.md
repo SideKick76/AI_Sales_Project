@@ -6,7 +6,8 @@ This program is a Streamlit-based AI Sales Tool that processes user prompts to s
 
 Default it run locally using ollama and llama3.2 model. For local run you need to run "ollama serve" and download LLM="llama3.2" and Embeddings="nomic-embed-text". 
 
-Using Open AI chage USE_LLM_LOCAL=False in run_sales.py and set your key as described below.
+Using Open AI change USE_LLM_LOCAL=False in run_sales.py and set your key as described below. 
+Note that the "gpt-3.5-turbo-instruct" is Not a good model for this and I recomend using a model that support more tokens.
 
 Additional Setup
 * Add Content
