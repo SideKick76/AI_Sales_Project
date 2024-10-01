@@ -6,3 +6,4 @@ vector_local_False/
 # Ignore all files in the folder
 text/*
 __pycache__/
+custom.py

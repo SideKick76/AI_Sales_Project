@@ -1,25 +1,9 @@
 
-
+import custom
 import os
 import pdfplumber
 
 from langchain_community.document_loaders import UnstructuredURLLoader
-
-# %% [markdown]
-# Take environment variables from .env (especially openai api key)
-from dotenv import load_dotenv
-load_dotenv()
-
-
-file_paths = [
-    os.getenv("FILE_PATH1"),
-    os.getenv("FILE_PATH2"),
-    os.getenv("FILE_PATH3"),
-    os.getenv("FILE_PATH4"),
-    os.getenv("FILE_PATH5"),
-    os.getenv("FILE_PATH6"),
-    os.getenv("FILE_PATH7")
-]
 
 # %%
 class Document:
@@ -32,7 +16,7 @@ class Document:
 # # %%
 def read_pdfs_to_docs():
     documents = []
-    for file_path in file_paths:
+    for file_path in custom.FILE_PATHS:
         file_name = file_path.split('/')[-1]  # Extract the file name from the file path
         with pdfplumber.open(file_path) as pdf:
             for page in pdf.pages:
@@ -51,7 +35,7 @@ def read_text_files_to_docs():
     """
 
     documents = []
-    for file_path in file_paths:
+    for file_path in custom.FILE_PATHS:
         with open(file_path, 'r') as file:
             text = file.read()
             documents.append(Document(page_content=text, metadata={'sources': file_path}))
@@ -61,15 +45,8 @@ def read_text_files_to_docs():
 
 def save_web_data_to_files(urls):
 
-    # Retrieve URLs from environment variables
-    urls = [
-        os.getenv("URL1"),
-        os.getenv("URL2"),
-        os.getenv("URL3")
-    ]
-
     # Load the data from the URLs
-    loader = UnstructuredURLLoader(urls=urls)
+    loader = UnstructuredURLLoader(urls=custom.URLS)
     web_data = loader.load()
 
     # Save the content to text files

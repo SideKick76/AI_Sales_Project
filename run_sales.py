@@ -4,6 +4,7 @@ USE_LLM_LOCAL = True
 # Local imports
 import fetch_sales_data
 import helper
+import custom
 
 # System imports
 import shutil
@@ -32,9 +33,6 @@ else:
     llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0, max_tokens=3000) # argument to match the FAISS settings
     model_text_size=600
 
-# Take environment variables from .env (especially openai api key)
-from dotenv import load_dotenv
-load_dotenv()
 
 # %%
 vector_path = "vector_local_" + str(USE_LLM_LOCAL)
@@ -110,7 +108,7 @@ def search_faiss_index_with_score(vectorstore_faiss, query, k=4, fetch_k=100, fi
 
 def generate_custom_prompt_and_invoke_chain(results, Query):
     # Retrieve the custom prompt from environment variables with a default value
-    custom_prompt_string = os.getenv("MY_PROMPT")
+    custom_prompt_string = custom.MY_PROMPT
     print(custom_prompt_string)
     
     # Customize the prompt to reflect the CTO's perspective

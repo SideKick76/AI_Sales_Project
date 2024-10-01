@@ -1,3 +1,7 @@
+# Take environment variables from .env (especially openai api key)
+from dotenv import load_dotenv
+load_dotenv()
+
 # Local imports
 import run_sales
 
@@ -8,6 +12,7 @@ import time
 
 from pprint import pprint  # Import the pprint module
 from langchain_community.vectorstores import FAISS
+
 
 # Function to simulate processing
 def process_input(prompt):
