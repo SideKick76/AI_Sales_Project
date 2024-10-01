@@ -24,11 +24,13 @@ if USE_LLM_LOCAL:
     from langchain_community.embeddings import OllamaEmbeddings, GPT4AllEmbeddings
     embeddings = OllamaEmbeddings(model="nomic-embed-text", show_progress=True)
     llm = ChatOllama(model="llama3.2", temperature=0,num_predict=2000, num_ctx=10000)   # argument to match the FAISS settings
+    model_text_size=1500
 else:
     from langchain_openai import OpenAI
     from langchain_openai import OpenAIEmbeddings
     embeddings = OpenAIEmbeddings()
-    llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0) # argument as "max_tokens=" to match the FAISS settings
+    llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0, max_tokens=3000) # argument to match the FAISS settings
+    model_text_size=600
 
 # Take environment variables from .env (especially openai api key)
 from dotenv import load_dotenv
@@ -58,7 +60,7 @@ def process_and_split_documents(verbose=False):
     # Setup how to split text
     text_splitter = RecursiveCharacterTextSplitter(
         separators=['\n\n', '\n', '.', ','],
-        chunk_size=1500,  # Maximum size of a chunk
+        chunk_size=model_text_size,  # Maximum size of a chunk
         chunk_overlap=20,  # Overlap between chunks
         length_function=len  # Function to measure chunk size
     )
