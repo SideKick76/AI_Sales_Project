@@ -1,18 +1,18 @@
-# %%
-USE_LLM_LOCAL = False
-
 # Local imports
 import run_sales
 
 # System imports
 import os
 import streamlit as st
+import time
 
 from pprint import pprint  # Import the pprint module
 from langchain_community.vectorstores import FAISS
 
 # Function to simulate processing
 def process_input(prompt):
+    start_time = time.time()  # Start the timer
+    
     if run_sales.check_faiss_avaible():
         vectorstore_faiss = run_sales.load_faiss()
     else:
@@ -21,7 +21,10 @@ def process_input(prompt):
     results = run_sales.search_faiss_index_with_score(vectorstore_faiss, prompt)
     result, cleaned_sources = run_sales.generate_custom_prompt_and_invoke_chain(results,prompt)
     cleaned_sources = '\n'.join([f"- {item[0]}" for item in cleaned_sources])   # Make it cleaner and as bullets
-    return f"{result} \n\nsources:\n{cleaned_sources}"
+    end_time = time.time()  # End the timer
+    
+    execution_time = end_time - start_time  # Calculate the execution time
+    return f"{result} \n\nsources:\n{cleaned_sources}\n\nExecution Time: {execution_time:.2f} sec"
 
 
 # Streamlit page configuration
