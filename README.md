@@ -18,3 +18,12 @@ Create a .env file in the project folder if you plan to use OpanAI remote model.
 * OPENAI_API_KEY=sk-.....
 
 Make adjustments and rename the "rename_me_to_custom.py" to "custom.py" 
+
+If you prefer to use virtual enviroment for python
+* virtualenv ../python-env
+* . ../python-env/bin/activate
+
+* pip install -r requirements.txt
+
+To run the server
+* streamlit run main.py
