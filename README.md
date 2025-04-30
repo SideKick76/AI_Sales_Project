@@ -19,11 +19,10 @@ Create a .env file in the project folder if you plan to use OpanAI remote model.
 
 Make adjustments and rename the "rename_me_to_custom.py" to "custom.py" 
 
-Setup Ollama
+Setup Ollama (updated 4/29/2025)
 * curl -fsSL https://ollama.com/install.sh | sh
 * ollama pull nomic-embed-text
-* ollama pull llama3.2
-* ollama serve
+* ollama pull llama3.2  
 
 If you prefer to use virtual enviroment for python
 * virtualenv ../python-env
